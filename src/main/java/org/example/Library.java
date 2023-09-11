@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class Library {
 
-    List<Book> library = new ArrayList<>();
+    private List<Book> library = new ArrayList<>();
 
 
     public void addBook(Book book){
