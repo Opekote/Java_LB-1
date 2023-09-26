@@ -37,9 +37,7 @@ public class LibraryTest {
     @Test
     void testFindBookViaNameNotFound() {
         //Check of findBookViaName method.Adding book and then compare results.If book was not found method returns "No a such Book".
-        assertThrows(IllegalArgumentException.class, () ->
-            library.findBookViaName("Non-existent Book")
-        );
+        assertNull(library.findBookViaName("Non-existent Book"));
     }
 
     @Test
@@ -55,9 +53,8 @@ public class LibraryTest {
     @Test
 
     void testRemoveBookNotFound() {
-        // Checking if method returns exception if no a such book
-        assertThrows(IllegalArgumentException.class, () ->
-            library.removeBook("Non-existent ISBN")
+        // Checking if method returns false.So there is no such book
+        assertFalse(library.removeBook("Non-existent ISBN")
         );
     }
 }

@@ -22,25 +22,40 @@ public class Library {
         }
     }
 
-    public Book findBookViaName(String name) {
-        Book foundBook = library.stream()
-                .filter(book -> book.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No a such book with name ->" + name));
+    public Book findBookViaName(String name) throws IllegalArgumentException {
+        try{
+            return library.stream()
+                    .filter(book -> book.getName().equals(name))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("No a such book with name ->" + name));
 
-        return foundBook;
 
+        }
+        catch (IllegalArgumentException ex){
+            System.err.println(ex.getMessage());
+            return null;
+
+        }
 
     }
 
-    public void removeBook(String ISBN) throws IllegalArgumentException {
+    public boolean removeBook(String ISBN) throws IllegalArgumentException {
 
 
-        if (library.removeIf(book -> book.getISBN().equals(ISBN))) {
-            System.out.println("Book removed");
-        } else {
-            throw new IllegalArgumentException("Can't remove.No a such book");
+        try {
+            if (library.removeIf(book -> book.getISBN().equals(ISBN))) {
+                System.out.println("Book removed");
+                return true;
+            } else {
+                throw new IllegalArgumentException("Can't remove.No a such book with ISBN ->" + ISBN) ;
+            }
         }
+        catch (IllegalArgumentException ex){
+            System.err.println(ex.getMessage());
+            return false;
+
+        }
+
     }
 
 
