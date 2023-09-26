@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Library {
 
-    List<Book> library = new ArrayList<>();
+    private List<Book> library = new ArrayList<>();
 
     public List<Book> getLibrary() {
         return library;
