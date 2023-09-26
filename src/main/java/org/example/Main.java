@@ -1,19 +1,38 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
         Library library = new Library();
-        Book book1 = Book.createBook("Adventures Of Tom Sawyer", "Mark Twain","9780195810400",1978);
-        Book book2 = Book.createBook("Charlie and the Chocolate Factory", "Roald Dahl","9780060510657",1002);
-        library.addBook(book1);
-        library.addBook(book2);
-        library.showAllBooks();
-        System.out.println(library.findBookViaName("Adventures Of Tom Sawyer"));
-        System.out.println(library.findBookViaName("Adventures Of Tommy Angelo"));
-        library.removeBook("9780195810400");
-        library.removeBook("9780195819400");
-        library.showAllBooks();
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            System.out.println("Choose an option.\n1. Add book\n2. Display all books\n3. Search by title\n4.Remove by ISBN\n5. Exit");
+            int option = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (option) {
+                case 1 -> {
+                    System.out.println("Enter name, Author, ISBN, publishing year: ");
+                    library.addBook(new Book(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextInt()));
+                    scanner.nextLine();
+                }
+                case 2 -> library.showAllBooks();
+                case 3 -> {
+                    System.out.println("Enter title to find:");
+                    library.findBookViaName(scanner.nextLine());
+                }
+                case 4 -> {
+                    System.out.println("Enter ISBN to remove");
+                    library.removeBook(scanner.nextLine());
+                }
+                case 5 -> {
+                    return;
+                }
+                default -> System.out.println("Invalid option.Choose another");
+            }
+        }
 
     }
 }

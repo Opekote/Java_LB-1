@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Library {
 
-    private List<Book> library = new ArrayList<>();
+    private final List<Book> library = new ArrayList<>();
 
     public List<Book> getLibrary() {
         return library;
@@ -24,10 +24,12 @@ public class Library {
 
     public Book findBookViaName(String name) throws IllegalArgumentException {
         try{
-            return library.stream()
+            Book foundBook = library.stream()
                     .filter(book -> book != null && book.getName() != null && book.getName().equals(name))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("No a such book with name ->" + name));
+            System.out.println("Your book" + foundBook.toString());
+            return foundBook;
 
 
         }
