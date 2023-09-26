@@ -9,6 +9,9 @@ public class Library {
 
     List<Book> library = new ArrayList<>();
 
+    public List<Book> getLibrary() {
+        return library;
+    }
 
     public void addBook(Book book){
         library.add(book);
@@ -20,24 +23,24 @@ public class Library {
         }
     }
 
-    public void findBookViaName(String name) {
-        Optional<Book> foundBook = library.stream()
+    public Book findBookViaName(String name) {
+        Book foundBook = library.stream()
                 .filter(book -> book.getName().equals(name))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No a such book with name ->" + name));
 
-        String bookString = foundBook.map(Book::toString).orElse("No a such Book");
+        return foundBook;
 
-        System.out.println("Found book -> " + bookString);
 
     }
 
-    public void removeBook(String ISBN) {
-        boolean bookExist = library.removeIf(book -> book.getISBN().equals(ISBN));
+    public void removeBook(String ISBN) throws IllegalArgumentException {
 
-        if (bookExist) {
+
+        if (library.removeIf(book -> book.getISBN().equals(ISBN))) {
             System.out.println("Book removed");
         } else {
-            System.out.println("Can't remove.No such book");
+            throw new IllegalArgumentException("Can't remove.No a such book");
         }
     }
 
