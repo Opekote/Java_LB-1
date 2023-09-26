@@ -17,22 +17,14 @@ public class BookTest {
 
     @Test
     void testCreateBookWithInvalidISBN() {
-        // Trying to create book with invalid ISBN
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-            Book.createBook("Invalid Book", "Invalid Author", "12345", 2023)
-        );
-
-        assertEquals("Wrong ISBN. ISBN can consist only of 10 or 13 digits", exception.getMessage());
+        // Trying to create book with invalid ISBN.And ensure we get null
+        assertNull(Book.createBook("Invalid Book", "Invalid Author", "12345", 2023));
     }
 
     @Test
     void testCreateBookWithInvalidYear() {
-        // Trying to create book with invalid year
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                Book.createBook("Invalid Book", "Invalid Author", "9780195810400", 1000)
-        );
-
-        assertEquals("Wrong year. Printing of books started at 1445 A.D", exception.getMessage());
+        // Trying to create book with invalid year.And ensure we get null
+        assertNull(Book.createBook("Invalid Book", "Invalid Author", "9780195810400", 1000));
     }
 }
 

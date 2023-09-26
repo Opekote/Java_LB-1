@@ -36,7 +36,7 @@ public class LibraryTest {
 
     @Test
     void testFindBookViaNameNotFound() {
-        //Check of findBookViaName method.Adding book and then compare results.If book was not found method returns "No a such Book".
+        //Check of findBookViaName method.If book not found method returns null.
         assertNull(library.findBookViaName("Non-existent Book"));
     }
 

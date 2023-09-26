@@ -25,7 +25,7 @@ public class Library {
     public Book findBookViaName(String name) throws IllegalArgumentException {
         try{
             return library.stream()
-                    .filter(book -> book.getName().equals(name))
+                    .filter(book -> book != null && book.getName() != null && book.getName().equals(name))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("No a such book with name ->" + name));
 
@@ -43,7 +43,7 @@ public class Library {
 
 
         try {
-            if (library.removeIf(book -> book.getISBN().equals(ISBN))) {
+            if (library.removeIf(book ->book != null && book.getISBN() != null && book.getISBN().equals(ISBN))) {
                 System.out.println("Book removed");
                 return true;
             } else {
